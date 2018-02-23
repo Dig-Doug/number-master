@@ -66,7 +66,7 @@ const guessNumber = app => {
         return app.ask(richResponse, strings.general.noInputs);
     }
     else {
-        const respone = strings.general.status(answer[0], answer[1], data.numTriesLeft);
+        const response = strings.general.status(answer[0], answer[1], data.numTriesLeft);
         return app.ask(app.buildRichResponse()
                 .addSimpleResponse({
                     speech: `${userGuessArray}. ${response}`,
