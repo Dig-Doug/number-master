@@ -19,7 +19,8 @@ const {sprintf} = require('sprintf-js');
 
 const strings = require('./strings');
 const generatePassword = require('./generate_password');
-const verification = require('./verification');
+const {initData} = require('./init_data');
+const {guessNumber} = require('./guess_number');
 
 process.env.DEBUG = 'actions-on-google:*';
 
@@ -39,91 +40,8 @@ const Parameters = {
 /** @param {Array<string>} messages The messages to concat */
 const concat = messages => messages.map(message => message.trim()).join(' ');
 
-/**
- * Set up app.data for use in the action
- * @param {DialogflowApp} app DialogflowApp instance
- */
-const initData = app => {
-    /** @type {AppData} */
-    const data = app.data;
-    if (!data.secretNumber) {
-        data.secretNumber = generatePassword.generatePassword(4);
-    }
-    if (!data.numTriesLeft) {
-        data.numTriesLeft = 10;
-    }
-    return data;
-};
-
 const generateSuggestion = () => {
     return generatePassword.generatePassword(4).join('');
-};
-
-const guessNumber = app => {
-    const data = initData(app);
-    const secretNumber = data.secretNumber;
-    /** @type {string} */
-    const userGuess = app.getArgument(Parameters.NUMBER);
-    const userGuessArray = verification.stringToDigitArray(userGuess);
-    if (!verification.isValidArray(userGuessArray)) {
-        return app.ask(app.buildRichResponse()
-                .addSimpleResponse('Please say a four-digit number. Digit cannot repeat.')
-                .addSuggestions([
-                    generateSuggestion(),
-                    generateSuggestion(),
-                    generateSuggestion(),
-                    'Give up']),
-            strings.general.noInputs);
-    }
-    const answer = verification.verify(userGuessArray, secretNumber);
-
-    data.numTriesLeft = data.numTriesLeft - 1;
-    if (answer[0] === NUM_DIGITS) {
-        // Win
-        const card = app.buildBasicCard(strings.general.win)
-            .setImage(strings.general.winImage, strisgs.general.winImageAlt);
-
-        const richResponse = app.buildRichResponse()
-            .addSimpleResponse(strings.general.winSound)
-            .addBasicCard(card)
-            .addSuggestions([
-                'Play again',
-                'Quit']);
-        // TODO: Play again
-
-        return app.ask(richResponse, strings.general.noInputs);
-    }
-    else if (data.numTriesLeft == 0) {
-        return app.ask(app.buildRichResponse()
-                .addSimpleResponse('You lose!')
-                .addSuggestions([
-                    'Play again',
-                    'Quit']),
-            strings.general.noInputs);
-    } else {
-        const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
-        return app.ask(app.buildRichResponse()
-                .addSimpleResponse({
-                    speech: `${userGuess}. ${response}`,
-                    displayText: response
-                })
-                .addSuggestions(['1234', '5678', '1357', 'Give up']),
-            strings.general.noInputs);
-    }
-    console.log('secretNumber: ' + secretNumber);
-
-    const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
-    return app.ask(app.buildRichResponse()
-            .addSimpleResponse({
-                speech: `${userGuessArray}. ${response}`,
-                displayText: response
-            })
-            .addSuggestions([
-                generateSuggestion(),
-                generateSuggestion(),
-                generateSuggestion(),
-                'Give up']),
-        strings.general.noInputs);
 };
 
 const giveUp = app => {
@@ -167,15 +85,5 @@ const numberMastermind = functions.https.onRequest((request, response) => {
 });
 
 module.exports = {
-    < < < < < < < HEAD
-numberMastermind
-}
-;
-======
-=
     numberMastermind
-}
-;
->>>>>>>
-23241422
-cd053ae82f6d95031d2968a6e508d087
+};
