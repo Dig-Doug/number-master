@@ -18,7 +18,6 @@ const functions = require('firebase-functions');
 const {sprintf} = require('sprintf-js');
 
 const strings = require('./strings');
-const generatePassword = require('./generate_password');
 const {initData} = require('./init_data');
 const {guessNumber} = require('./guess_number');
 const {giveUp} = require('./give_up');

@@ -1,6 +1,7 @@
 const {initData} = require('./init_data');
 const verification = require('./verification');
 const strings = require('./strings');
+const generatePassword = require('./generate_password');
 
 /** Dialogflow Parameters {@link https://dialogflow.com/docs/actions-and-parameters#parameters} */
 const Parameters = {
