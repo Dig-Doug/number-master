@@ -12,6 +12,10 @@ const generateSuggestion = () => {
   return generatePassword.generatePassword(4).join('');
 };
 
+const playSound = (sound) => {
+  return `<speak><audio src=\"${sound}\"></audio></speak>`;
+};
+
 const NUM_DIGITS = 4;
 
 const guessNumber = app => {
@@ -41,7 +45,7 @@ const guessNumber = app => {
             .setImage(strings.general.winImage, strings.general.winImageAlt);
 
         const richResponse = app.buildRichResponse()
-            .addSimpleResponse(strings.general.winSound)
+            .addSimpleResponse(playSound(strings.general.winSound))
             .addBasicCard(card)
             .addSuggestions([
                 strings.suggestions.giveup,
@@ -57,7 +61,7 @@ const guessNumber = app => {
             .setImage(strings.general.loseImage, strings.general.loseImageAlt);
     
         return app.ask(app.buildRichResponse()
-                .addSimpleResponse(strings.general.loseSound)
+                .addSimpleResponse(playSound(strings.general.loseSound))
                 .addBasicCard(card)
                 .addSuggestions([
                   generateSuggestion(),
