@@ -12,8 +12,8 @@ const generateSuggestion = () => {
   return generatePassword.generatePassword(4).join('');
 };
 
-const playSound = (sound) => {
-  return `<speak><audio src=\"${sound}\"></audio></speak>`;
+const playSound = (sound, text) => {
+  return `<speak><audio src=\"${sound}\"></audio>${text}</speak>`;
 };
 
 const NUM_DIGITS = 4;
@@ -41,11 +41,10 @@ const guessNumber = app => {
     data.numTriesLeft = data.numTriesLeft - 1;
     if (answer[0] === NUM_DIGITS) {
         // Win
-        const card = app.buildBasicCard(strings.general.win)
+        const card = app.buildBasicCard(playSound(strings.general.winSound, strings.general.win))
             .setImage(strings.general.winImage, strings.general.winImageAlt);
 
         const richResponse = app.buildRichResponse()
-            .addSimpleResponse(playSound(strings.general.winSound))
             .addBasicCard(card)
             .addSuggestions([
                 strings.suggestions.giveup,
