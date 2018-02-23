@@ -26,6 +26,8 @@ const guessNumber = app => {
     /** @type {string} */
     const userGuess = app.getArgument(Parameters.NUMBER);
     const userGuessArray = verification.stringToDigitArray(userGuess);
+    console.log("UserGuess: " + userGuess);
+    console.log("UserGuessArray: " + userGuessArray);
     if (!verification.isValidArray(userGuessArray)) {
         return app.ask(app.buildRichResponse()
                 .addSimpleResponse(strings.response.error_not_a_number)
