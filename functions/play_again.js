@@ -5,7 +5,7 @@ const generatePassword = require('./generate_password');
 const playAgain = app => {
     const data = initData(app);
     data.secretNumber = generatePassword.generatePassword(4);
-    data.numTries = 10;
+    data.numTriesLeft = 10;
     return app.ask(app.buildRichResponse()
             .addSimpleResponse({
                 speech: strings.response.start_new_game_speech,
