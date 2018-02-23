@@ -1,5 +1,6 @@
 const {initData} = require('./init_data');
 const strings = require('./strings');
+const generatePassword = require('./generate_password');
 
 const giveUp = app => {
     const data = initData(app);
