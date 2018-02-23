@@ -72,7 +72,7 @@ actionMap.set(Actions.GUESS_NUMBER, guessNumber);
  * @param {Request} request An Express like Request object of the HTTP request
  * @param {Response} response An Express like Response object to send back data
  */
-const factsAboutGoogle = functions.https.onRequest((request, response) => {
+const numberMastermind = functions.https.onRequest((request, response) => {
   const app = new DialogflowApp({ request, response });
   console.log(`Request headers: ${JSON.stringify(request.headers)}`);
   console.log(`Request body: ${JSON.stringify(request.body)}`);
@@ -80,5 +80,5 @@ const factsAboutGoogle = functions.https.onRequest((request, response) => {
 });
 
 module.exports = {
-  factsAboutGoogle
+  numberMastermind
 };
