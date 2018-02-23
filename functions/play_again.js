@@ -15,7 +15,6 @@ const playAgain = app => {
                 generatePassword.generateSuggestion(),
                 generatePassword.generateSuggestion(),
                 generatePassword.generateSuggestion(),
-                strings.suggestions.start_new_game,
                 strings.suggestions.quit]),
         strings.general.noInputs);
 };
