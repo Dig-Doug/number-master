@@ -34,7 +34,7 @@ const general = {
     winImage: "https://cdn.shopify.com/s/files/1/0185/5092/products/objects-0017.png?v=1369543805",
     winImageAlt: "Win image",
     // TODO(droeper) - Update sound
-    winSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
+    winSound: "https://actions.google.com/sounds/v1/crowds/team_cheer.ogg",
     lose: "You lose!",
     loseImage: "https://cdn.pixabay.com/photo/2018/02/19/14/16/the-eleventh-hour-3165193_1280.jpg",
     loseImageAlt: "Lose image",
