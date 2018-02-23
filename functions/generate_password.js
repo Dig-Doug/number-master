@@ -1,6 +1,7 @@
 const random = require('random-js');
 
 const RAND_ENG = random.engines.nativeMath;
+const NUM_DIGITS = 4;
 
 function generatePassword(numDigits) {
     if (numDigits > 10 || numDigits <= 0) {
@@ -20,6 +21,11 @@ function generatePassword(numDigits) {
     return remainingDigits.slice(0, numDigits);
 }
 
+const generateSuggestion = () => {
+    return generatePassword.generatePassword(NUM_DIGITS).join('');
+};
+
 module.exports = {
-   generatePassword
+   generatePassword,
+   generateSuggestion,
 };
