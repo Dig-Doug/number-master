@@ -47,6 +47,7 @@ const guessNumber = app => {
             .setImage(strings.general.loseImage, strings.general.loseImageAlt);
 
         return app.ask(app.buildRichResponse()
+                .addSimpleResponse(playSound(strings.general.loseSound, msg))
                 .addBasicCard(card)
                 .addSuggestions([
                     strings.suggestions.quit,
@@ -58,7 +59,8 @@ const guessNumber = app => {
         const card = app.buildBasicCard(playSound(strings.general.winSound, strings.general.win))
             .setImage(strings.general.winImage, strings.general.winImageAlt);
 
-        const richResponse = app.buildRichResponse()
+        const richResponse = app.buildRichResponse(
+            .addSimpleResponse(playSound(strings.general.winSound, strings.general.win))
             .addBasicCard(card)
             .addSuggestions([
                 strings.suggestions.quit,
