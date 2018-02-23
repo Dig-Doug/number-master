@@ -21,10 +21,11 @@ const strings = require('./strings');
 const generatePassword = require('./generate_password');
 const {initData} = require('./init_data');
 const {guessNumber} = require('./guess_number');
+const {giveUp} = require('./give_up');
+const {playAgain} = require('./play_again');
 
 process.env.DEBUG = 'actions-on-google:*';
 
-const NUM_DIGITS = 4;
 
 /** Dialogflow Actions {@link https://dialogflow.com/docs/actions-and-parameters#actions} */
 const Actions = {
@@ -43,28 +44,6 @@ const concat = messages => messages.map(message => message.trim()).join(' ');
 const generateSuggestion = () => {
     return generatePassword.generatePassword(4).join('');
 };
-
-const giveUp = app => {
-    const data = initData(app);
-    const secretNumber = data.secretNumber;
-    return app.ask(app.buildRichResponse()
-            .addSimpleResponse(`The secret number is ${secretNumber}`)
-            .addSuggestions(['Start a new game', 'Quit']),
-        strings.general.noInputs);
-};
-
-const playAgain = app => {
-    const data = initData(app);
-    data.secretNumber = generatePassword.generatePassword(4);
-    return app.ask(app.buildRichResponse()
-            .addSimpleResponse({
-                speech: 'OK, new game. Please guess a four digit number',
-                displayText: 'Please guess a four digit number'
-            })
-            .addSuggestions(['Start a new game', 'Quit']),
-        strings.general.noInputs);
-};
-
 
 /** @type {Map<string, function(DialogflowApp): void>} */
 const actionMap = new Map();

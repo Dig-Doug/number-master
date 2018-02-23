@@ -2,6 +2,8 @@ const {initData} = require('./init_data');
 const verification = require('./verification');
 const strings = require('./strings');
 
+const NUM_DIGITS = 4;
+
 const guessNumber = app => {
     const data = initData(app);
 
