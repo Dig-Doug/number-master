@@ -18,6 +18,7 @@ const functions = require('firebase-functions');
 const { sprintf } = require('sprintf-js');
 
 const strings = require('./strings');
+const generatePassword = require('./generate_password');
 
 process.env.DEBUG = 'actions-on-google:*';
 
@@ -42,7 +43,7 @@ const initData = app => {
   /** @type {AppData} */
   const data = app.data;
   if (!data.secretNumber) {
-    data.secretNumber = '3456';
+    data.secretNumber = generatePassword.generatePassword(4);
   }
   return data;
 };
@@ -52,7 +53,7 @@ const guessNumber = app => {
   const secretNumber = data.secretNumber;
   /** @type {string} */
   const userGuess = app.getArgument(Parameters.NUMBER);
-  console.log('UserGuess: ' + userGuess);
+  console.log('secretNumber: ' + secretNumber);
   const response = 'You got X digit in the correct position, and Y digit in the wrong position.';
   return app.ask(app.buildRichResponse()
     .addSimpleResponse({
