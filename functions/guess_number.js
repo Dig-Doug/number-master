@@ -35,9 +35,8 @@ const guessNumber = app => {
                     generateSuggestion(),
                     generateSuggestion(),
                     generateSuggestion(),
-                    strings.suggestions.giveup,
                     strings.suggestions.instructions,
-                    strings.suggestions.start_new_game]),
+                    strings.suggestions.giveup]),
             strings.general.noInputs);
     }
     const answer = verification.verify(userGuessArray, secretNumber);
@@ -82,8 +81,7 @@ const guessNumber = app => {
                     generateSuggestion(),
                     generateSuggestion(),
                     generateSuggestion(),
-                    strings.suggestions.giveup,
-                    strings.suggestions.start_new_game]),
+                    strings.suggestions.giveup]),
             strings.general.noInputs);
     }
 };
