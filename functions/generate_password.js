@@ -22,7 +22,7 @@ function generatePassword(numDigits) {
 }
 
 const generateSuggestion = () => {
-    return generatePassword.generatePassword(NUM_DIGITS).join('');
+    return generatePassword(NUM_DIGITS).join('');
 };
 
 module.exports = {
