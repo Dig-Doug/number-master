@@ -59,8 +59,13 @@ const guessNumber = app => {
   /** @type {string} */
   const userGuess = app.getArgument(Parameters.NUMBER);
   console.log('UserGuess: ' + userGuess);
-  
-  return app.ask('UserGuess: ' + userGuess, strings.general.noInputs);
+  const response = 'You got X digit in the correct position, and Y digit in the wrong position.';
+  return app.ask(app.buildRichResponse()
+    .addSimpleResponse({
+      speech: userGuess + '. ' + response,
+      displayText: response})
+    .addSuggestions(['1234', '5678', '1357', 'Give up']),
+    strings.general.noInputs);
 };
 
 /** @type {Map<string, function(DialogflowApp): void>} */
