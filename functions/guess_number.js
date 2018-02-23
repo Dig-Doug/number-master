@@ -41,14 +41,15 @@ const guessNumber = app => {
     data.numTriesLeft = data.numTriesLeft - 1;
     if (data.numTriesLeft <= 0) {
         // Lose
-        const card = app.buildBasicCard(
-            strings.general.lose + " The answer was " + data.secretNumber.join(''))
+        const msg = strings.general.lose + " The answer was " + data.secretNumber.join('');
+        const card = app.buildBasicCard(playSound(strings.general.loseSound, msg))
             .setImage(strings.general.loseImage, strings.general.loseImageAlt);
 
         return app.ask(app.buildRichResponse()
-                .addSimpleResponse(playSound(strings.general.loseSound))
                 .addBasicCard(card)
-                .addSuggestions([strings.suggestions.play_again]),
+                .addSuggestions([
+                    strings.suggestions.quit,
+                    strings.suggestions.play_again]),
             strings.general.noInputs);
     }
     else if (answer[0] === NUM_DIGITS) {
@@ -57,9 +58,10 @@ const guessNumber = app => {
             .setImage(strings.general.winImage, strings.general.winImageAlt);
 
         const richResponse = app.buildRichResponse()
-            .addSimpleResponse(playSound(strings.general.winSound, strings.general.win))
             .addBasicCard(card)
-            .addSuggestions([strings.suggestions.play_again]);
+            .addSuggestions([
+                strings.suggestions.quit,
+                strings.suggestions.play_again]);
 
         return app.ask(richResponse, strings.general.noInputs);
     }
