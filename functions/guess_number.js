@@ -2,6 +2,15 @@ const {initData} = require('./init_data');
 const verification = require('./verification');
 const strings = require('./strings');
 
+/** Dialogflow Parameters {@link https://dialogflow.com/docs/actions-and-parameters#parameters} */
+const Parameters = {
+  NUMBER: 'number-integer'
+};
+
+const generateSuggestion = () => {
+  return generatePassword.generatePassword(4).join('');
+};
+
 const NUM_DIGITS = 4;
 
 const guessNumber = app => {
@@ -13,12 +22,13 @@ const guessNumber = app => {
     const userGuessArray = verification.stringToDigitArray(userGuess);
     if (!verification.isValidArray(userGuessArray)) {
         return app.ask(app.buildRichResponse()
-                .addSimpleResponse('Please say a four-digit number. Digit cannot repeat.')
+                .addSimpleResponse(strings.response.error_not_a_number)
                 .addSuggestions([
                     generateSuggestion(),
                     generateSuggestion(),
                     generateSuggestion(),
-                    'Give up']),
+                    strings.suggestions.giveup,
+                    strings.suggestions.start_new_game]),
             strings.general.noInputs);
     }
     const answer = verification.verify(userGuessArray, secretNumber);
@@ -33,8 +43,8 @@ const guessNumber = app => {
             .addSimpleResponse(strings.general.winSound)
             .addBasicCard(card)
             .addSuggestions([
-                'Play again',
-                'Quit']);
+                strings.suggestions.giveup,
+                strings.suggestions.play_again]);
         // TODO: Play again
 
         return app.ask(richResponse, strings.general.noInputs);
@@ -43,8 +53,11 @@ const guessNumber = app => {
         return app.ask(app.buildRichResponse()
                 .addSimpleResponse('You lose!')
                 .addSuggestions([
-                    'Play again',
-                    'Quit']),
+                  generateSuggestion(),
+                  generateSuggestion(),
+                  generateSuggestion(),
+                  strings.suggestions.giveup,
+                  strings.suggestions.play_again]),
             strings.general.noInputs);
     } else {
         const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
@@ -53,7 +66,12 @@ const guessNumber = app => {
                     speech: `${userGuess}. ${response}`,
                     displayText: response
                 })
-                .addSuggestions(['1234', '5678', '1357', 'Give up']),
+                .addSuggestions([
+                    generateSuggestion(),
+                    generateSuggestion(),
+                    generateSuggestion(),
+                    strings.suggestions.play_again,
+                    strings.suggestions.giveup]),
             strings.general.noInputs);
     }
     console.log('secretNumber: ' + secretNumber);
@@ -68,7 +86,8 @@ const guessNumber = app => {
                 generateSuggestion(),
                 generateSuggestion(),
                 generateSuggestion(),
-                'Give up']),
+                strings.suggestions.giveup,
+                strings.suggestions.start_new_game]),
         strings.general.noInputs);
 };
 
