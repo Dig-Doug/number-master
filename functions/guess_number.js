@@ -59,15 +59,12 @@ const guessNumber = app => {
         const richResponse = app.buildRichResponse()
             .addSimpleResponse(playSound(strings.general.winSound, strings.general.win))
             .addBasicCard(card)
-            .addSuggestions([
-                strings.suggestions.giveup,
-                strings.suggestions.play_again]);
-        // TODO: Play again
+            .addSuggestions([strings.suggestions.play_again]);
 
         return app.ask(richResponse, strings.general.noInputs);
     }
     else {
-        const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position. You have ${data.numTriesLeft} tries left. Cheat: ${JSON.stringify(data)}`;
+        const respone = strings.general.status(answer[0], answer[1], data.numTriesLeft);
         return app.ask(app.buildRichResponse()
                 .addSimpleResponse({
                     speech: `${userGuessArray}. ${response}`,

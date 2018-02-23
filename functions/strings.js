@@ -42,6 +42,15 @@ const general = {
     loseImageAlt: "Lose image",
     // TODO(droeper) - Update sound
     loseSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
+    status: (correct, incorrect, tries) => {
+        const digit = (num, name) => {
+            return `${num} ${name}${num == 1 ? '' : 's'}`;
+        };
+        let message = `You got ${digit(correct, 'number')} in the correct position and `;
+        message += `${digit(incorrect, 'number')} in the wrong position. `;
+        message += `You have ${digit(tries, 'try')} remaining.`;
+        return message;
+    }
 };
 
 const response = {
