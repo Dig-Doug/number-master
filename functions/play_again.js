@@ -12,8 +12,11 @@ const playAgain = app => {
                 displayText: strings.response.start_new_game_display
             })
             .addSuggestions([
-              strings.suggestions.start_new_game,
-              strings.suggestions.quit]),
+                generatePassword.generateSuggestion(),
+                generatePassword.generateSuggestion(),
+                generatePassword.generateSuggestion(),
+                strings.suggestions.start_new_game,
+                strings.suggestions.quit]),
         strings.general.noInputs);
 };
 
