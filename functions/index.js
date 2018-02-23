@@ -58,23 +58,25 @@ const guessNumber = app => {
   if (!verification.isValidArray(userGuessArray)) {
     return app.ask(app.buildRichResponse()
         .addSimpleResponse('Please say a four-digit number. Digit cannot repeat.')
-        .addSuggestions([generatePassword.generatePassword(4),
-          generatePassword.generatePassword(4),
-          generatePassword.generatePassword(4),
+        .addSuggestions([
+          generatePassword.generatePassword(4).join(''),
+          generatePassword.generatePassword(4).join(''),
+          generatePassword.generatePassword(4).join(''),
           'Give up']),
         strings.general.noInputs);
   }
   const answer = verification.verify(userGuessArray, secretNumber);
   console.log('secretNumber: ' + secretNumber);
   
-  const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position. Cheat: ${secretNumber}`;
+  const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
   return app.ask(app.buildRichResponse()
     .addSimpleResponse({
       speech: `${userGuessArray}. ${response}`,
       displayText: response})
-    .addSuggestions([generatePassword.generatePassword(4),
-      generatePassword.generatePassword(4), 
-      generatePassword.generatePassword(4),
+    .addSuggestions([
+      generatePassword.generatePassword(4).join(''),
+      generatePassword.generatePassword(4).join(''), 
+      generatePassword.generatePassword(4).join(''),
       'Give up']),
     strings.general.noInputs);
 };
