@@ -13,9 +13,9 @@
 
 'use strict';
 
-const {DialogflowApp} = require('actions-on-google');
+const { DialogflowApp } = require('actions-on-google');
 const functions = require('firebase-functions');
-const {sprintf} = require('sprintf-js');
+const { sprintf } = require('sprintf-js');
 
 const strings = require('./strings');
 const generatePassword = require('./generate_password');
@@ -50,33 +50,32 @@ const initData = app => {
 };
 
 const guessNumber = app => {
-  const data = initData(app);
-  const secretNumber = data.secretNumber;
-  /** @type {string} */
-  const userGuess = app.getArgument(Parameters.NUMBER);
-  const userGuessArray = verification.stringToDigitArray(userGuess);
-  if (!verification.isValidArray(userGuessArray)) {
+    const data = initData(app);
+    const secretNumber = data.secretNumber;
+    /** @type {string} */
+    const userGuess = app.getArgument(Parameters.NUMBER);
+    const userGuessArray = verification.stringToDigitArray(userGuess);
+    if (!verification.isValidArray(userGuessArray)) {
+        return app.ask(app.buildRichResponse()
+                .addSimpleResponse('Please say a number')
+                .addSuggestions(['1234', '5678', '1357', 'Give up']),
+            strings.general.noInputs);
+    }
+    const answer = verification.verify(userGuessArray, secretNumber);
+    console.log('secretNumber: ' + secretNumber);
+
+    const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
     return app.ask(app.buildRichResponse()
-        .addSimpleResponse('Please say a number')
-        .addSuggestions(['1234', '5678', '1357', 'Give up']),
+            .addSimpleResponse({
+                speech: `${userGuess}. ${response}`,
+                displayText: response})
+            .addSuggestions(['1234', '5678', '1357', 'Give up']),
         strings.general.noInputs);
-  }
-  const answer = verification.verify(userGuessArray, secretNumber);
-  console.log('secretNumber: ' + secretNumber);
-  
-  const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
-  return app.ask(app.buildRichResponse()
-    .addSimpleResponse({
-      speech: `${userGuess}. ${response}`,
-      displayText: response})
-    .addSuggestions(['1234', '5678', '1357', 'Give up']),
-    strings.general.noInputs);
 };
 
 const giveUp = app => {
     const data = initData(app);
     const secretNumber = data.secretNumber;
-
     const message = "The secret number is %s";
     return app.ask(app.buildRichResponse()
             .addSimpleResponse({
@@ -98,7 +97,7 @@ actionMap.set(Actions.GIVE_UP, giveUp);
  * @param {Response} response An Express like Response object to send back data
  */
 const numberMastermind = functions.https.onRequest((request, response) => {
-    const app = new DialogflowApp({request, response});
+    const app = new DialogflowApp({ request, response });
     console.log(`Request headers: ${JSON.stringify(request.headers)}`);
     console.log(`Request body: ${JSON.stringify(request.body)}`);
     app.handleRequest(actionMap);
