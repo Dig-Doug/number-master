@@ -44,7 +44,23 @@ const general = {
     loseSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
 };
 
+const response = {
+    "win": "You win!",
+    "error_not_a_number": "Please say a four-digit number. Digit cannot repeat.",
+    "start_new_game_speech": "OK, new game. Please guess a four digit number",
+    "start_new_game_display": "Please guess a four digit number"
+};
+
+const suggestions = {
+    "giveup": "Give Up",
+    "play_again": "Play again",
+    "start_new_game": "Start a new game",
+    "quit": "Quit",
+};
+
 // Use deepFreeze to make the constant objects immutable so they are not unintentionally modified
 module.exports = deepFreeze({
-    general
+    general,
+    response,
+    suggestions
 });
