@@ -30,21 +30,25 @@ const general = {
         "If you're still there, say that again.",
         "We can stop here. See you soon."
     ],
-    win: "You win!",
-    // TODO(droeper) - Update image
-    winImage: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Search_GSA.2e16d0ba.fill-300x300.png",
-    winImageAlt: "Win image",
-    // TODO(droeper) - Update sound
-    winSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
-    lose: "You lose!",
-    // TODO(droeper) - Update image
-    loseImage: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Search_GSA.2e16d0ba.fill-300x300.png",
-    loseImageAlt: "Lose image",
-    // TODO(droeper) - Update sound
-    loseSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
+};
+
+const response = {
+    "win": "You win!",
+    "error_not_a_number": "Please say a four-digit number. Digit cannot repeat.",
+    "start_new_game_speech": "OK, new game. Please guess a four digit number",
+    "start_new_game_display": "Please guess a four digit number"
+};
+
+const suggestions = {
+    "giveup": "Give Up",
+    "play_again": "Play again",
+    "start_new_game": "Start a new game",
+    "quit": "Quit",
 };
 
 // Use deepFreeze to make the constant objects immutable so they are not unintentionally modified
 module.exports = deepFreeze({
-    general
+    general,
+    response,
+    suggestions
 });
