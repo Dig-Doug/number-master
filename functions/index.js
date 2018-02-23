@@ -22,6 +22,7 @@ const {initData} = require('./init_data');
 const {guessNumber} = require('./guess_number');
 const {giveUp} = require('./give_up');
 const {playAgain} = require('./play_again');
+const {welcome} = require('./welcome');
 
 process.env.DEBUG = 'actions-on-google:*';
 
@@ -31,6 +32,7 @@ const Actions = {
     GUESS_NUMBER: 'guess.number',
     GIVE_UP: 'giveup',
     PLAY_AGAIN: 'play_again',
+    WELCOME: 'input.welcome',
 };
 
 /** @type {Map<string, function(DialogflowApp): void>} */
@@ -38,6 +40,8 @@ const actionMap = new Map();
 actionMap.set(Actions.GUESS_NUMBER, guessNumber);
 actionMap.set(Actions.GIVE_UP, giveUp);
 actionMap.set(Actions.PLAY_AGAIN, playAgain);
+actionMap.set(Actions.WELCOME, welcome);
+
 
 /**
  * The entry point to handle a http request
