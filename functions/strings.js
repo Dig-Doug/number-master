@@ -62,7 +62,7 @@ const response = {
 };
 
 const suggestions = {
-    "giveup": "Give Up",
+    "giveup": "Give up",
     "play_again": "Play again",
     "start_new_game": "Start a new game",
     "quit": "Quit",
