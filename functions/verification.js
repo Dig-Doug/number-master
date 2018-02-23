@@ -56,3 +56,9 @@ function verify(a, b) {
 
   return [correctCount, match - correctCount];
 }
+
+module.exports = {
+  stringToDigitArray,
+  isValidArray,
+  verify
+};
