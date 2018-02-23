@@ -33,17 +33,6 @@ const Actions = {
     GIVE_UP: 'giveup',
     PLAY_AGAIN: 'play_again',
 };
-/** Dialogflow Parameters {@link https://dialogflow.com/docs/actions-and-parameters#parameters} */
-const Parameters = {
-    NUMBER: 'number-integer'
-};
-
-/** @param {Array<string>} messages The messages to concat */
-const concat = messages => messages.map(message => message.trim()).join(' ');
-
-const generateSuggestion = () => {
-    return generatePassword.generatePassword(4).join('');
-};
 
 /** @type {Map<string, function(DialogflowApp): void>} */
 const actionMap = new Map();
