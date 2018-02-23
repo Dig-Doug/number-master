@@ -1,3 +1,5 @@
+const generatePassword = require('./generate_password');
+
 const NUM_DIGITS = 4;
 
 /**
