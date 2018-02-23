@@ -27,6 +27,7 @@ process.env.DEBUG = 'actions-on-google:*';
 const Actions = {
   GUESS_NUMBER: 'guess.number',
   GIVE_UP: 'giveup',
+  PLAY_AGAIN: 'play_again',
 };
 /** Dialogflow Parameters {@link https://dialogflow.com/docs/actions-and-parameters#parameters} */
 const Parameters = {
@@ -49,6 +50,10 @@ const initData = app => {
   return data;
 };
 
+const generateSuggestion = () => {
+  return generatePassword.generatePassword(4).join('');
+};
+
 const guessNumber = app => {
   const data = initData(app);
   const secretNumber = data.secretNumber;
@@ -59,9 +64,9 @@ const guessNumber = app => {
     return app.ask(app.buildRichResponse()
         .addSimpleResponse('Please say a four-digit number. Digit cannot repeat.')
         .addSuggestions([
-          generatePassword.generatePassword(4).join(''),
-          generatePassword.generatePassword(4).join(''),
-          generatePassword.generatePassword(4).join(''),
+          generateSuggestion(),
+          generateSuggestion(),
+          generateSuggestion(),
           'Give up']),
         strings.general.noInputs);
   }
@@ -82,9 +87,9 @@ const guessNumber = app => {
       speech: `${userGuessArray}. ${response}`,
       displayText: response})
     .addSuggestions([
-      generatePassword.generatePassword(4).join(''),
-      generatePassword.generatePassword(4).join(''), 
-      generatePassword.generatePassword(4).join(''),
+      generateSuggestion(),
+      generateSuggestion(),
+      generateSuggestion(),
       'Give up']),
     strings.general.noInputs);
 };
@@ -98,10 +103,24 @@ const giveUp = app => {
     strings.general.noInputs);
 };
 
+const playAgain = app => {
+  const data = initData(app);
+  data.secretNumber = generatePassword.generatePassword(4);
+  return app.ask(app.buildRichResponse()
+    .addSimpleResponse({
+      speech: 'OK, new game. Please guess a four digit number',
+      displayText: 'Please guess a four digit number'
+    })
+    .addSuggestions(['Start a new game', 'Quit']),
+    strings.general.noInputs);
+};
+
+
 /** @type {Map<string, function(DialogflowApp): void>} */
 const actionMap = new Map();
 actionMap.set(Actions.GUESS_NUMBER, guessNumber);
 actionMap.set(Actions.GIVE_UP, giveUp);
+actionMap.set(Actions.PLAY_AGAIN, playAgain);
 
 /**
  * The entry point to handle a http request
