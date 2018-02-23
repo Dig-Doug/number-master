@@ -20,6 +20,7 @@ const NUM_DIGITS = 4;
 
 const guessNumber = app => {
     const data = initData(app);
+    console.log(data);
 
     const secretNumber = data.secretNumber;
     /** @type {string} */
