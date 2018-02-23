@@ -5,7 +5,7 @@ const giveUp = app => {
     const data = initData(app);
     const secretNumber = data.secretNumber;
     return app.ask(app.buildRichResponse()
-            .addSimpleResponse(`The secret number is ${secretNumber}`)
+            .addSimpleResponse(`The secret number is ${secretNumber.join('')}`)
             .addSuggestions(
               [strings.suggestions.start_new_game,
               strings.suggestions.quit]),
