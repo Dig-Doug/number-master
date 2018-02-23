@@ -6,6 +6,8 @@ const giveUp = app => {
     const secretNumber = data.secretNumber;
     return app.ask(app.buildRichResponse()
             .addSimpleResponse(`The secret number is ${secretNumber}`)
-            .addSuggestions(['Start a new game', 'Quit']),
+            .addSuggestions(
+              [strings.suggestions.start_new_game,
+              strings.suggestions.quit]),
         strings.general.noInputs);
 };

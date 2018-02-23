@@ -50,6 +50,7 @@ const guessNumber = app => {
         return app.ask(richResponse, strings.general.noInputs);
     }
     else if (data.numTriesLeft == 0) {
+        // Lose
         return app.ask(app.buildRichResponse()
                 .addSimpleResponse('You lose!')
                 .addSuggestions([
@@ -63,32 +64,17 @@ const guessNumber = app => {
         const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
         return app.ask(app.buildRichResponse()
                 .addSimpleResponse({
-                    speech: `${userGuess}. ${response}`,
+                    speech: `${userGuessArray}. ${response}`,
                     displayText: response
                 })
                 .addSuggestions([
                     generateSuggestion(),
                     generateSuggestion(),
                     generateSuggestion(),
-                    strings.suggestions.play_again,
-                    strings.suggestions.giveup]),
+                    strings.suggestions.giveup,
+                    strings.suggestions.start_new_game]),
             strings.general.noInputs);
     }
-    console.log('secretNumber: ' + secretNumber);
-
-    const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
-    return app.ask(app.buildRichResponse()
-            .addSimpleResponse({
-                speech: `${userGuessArray}. ${response}`,
-                displayText: response
-            })
-            .addSuggestions([
-                generateSuggestion(),
-                generateSuggestion(),
-                generateSuggestion(),
-                strings.suggestions.giveup,
-                strings.suggestions.start_new_game]),
-        strings.general.noInputs);
 };
 
 module.exports = {
