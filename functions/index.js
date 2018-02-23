@@ -45,32 +45,6 @@ const generateSuggestion = () => {
     return generatePassword.generatePassword(4).join('');
 };
 
-<<<<<<< HEAD
-const giveUp = app => {
-    const data = initData(app);
-    const secretNumber = data.secretNumber;
-    return app.ask(app.buildRichResponse()
-            .addSimpleResponse(`The secret number is ${secretNumber}`)
-            .addSuggestions(['Start a new game', 'Quit']),
-        strings.general.noInputs);
-};
-
-const playAgain = app => {
-    data = app.data
-    data.secretNumber = generatePassword.generatePassword(4);
-    data.numTries = 10;
-    return app.ask(app.buildRichResponse()
-            .addSimpleResponse({
-                speech: 'OK, new game. Please guess a four digit number',
-                displayText: 'Please guess a four digit number'
-            })
-            .addSuggestions(['Start a new game', 'Quit']),
-        strings.general.noInputs);
-};
-
-
-=======
->>>>>>> d3784763787a90810dd12484c87c959c9bec2661
 /** @type {Map<string, function(DialogflowApp): void>} */
 const actionMap = new Map();
 actionMap.set(Actions.GUESS_NUMBER, guessNumber);
