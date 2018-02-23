@@ -23,6 +23,8 @@ const verification = require('./verification');
 
 process.env.DEBUG = 'actions-on-google:*';
 
+const NUM_DIGITS = 4;
+
 /** Dialogflow Actions {@link https://dialogflow.com/docs/actions-and-parameters#actions} */
 const Actions = {
     GUESS_NUMBER: 'guess.number',
@@ -64,13 +66,26 @@ const guessNumber = app => {
     const answer = verification.verify(userGuessArray, secretNumber);
     console.log('secretNumber: ' + secretNumber);
 
-    const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
-    return app.ask(app.buildRichResponse()
-            .addSimpleResponse({
-                speech: `${userGuess}. ${response}`,
-                displayText: response})
-            .addSuggestions(['1234', '5678', '1357', 'Give up']),
-        strings.general.noInputs);
+    if (answer[0] === NUM_DIGITS) {
+        // Win
+        const card = app.buildBasicCard(strings.general.win)
+            .setImage(strings.general.winImage, strings.general.winImageAlt);
+
+        const richResponse = app.buildRichResponse()
+            .addSimpleResponse(strings.general.winSound)
+            .addBasicCard(card);
+        // TODO: Play again
+
+        return richResponse;
+    } else {
+        const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
+        return app.ask(app.buildRichResponse()
+                .addSimpleResponse({
+                    speech: `${userGuess}. ${response}`,
+                    displayText: response})
+                .addSuggestions(['1234', '5678', '1357', 'Give up']),
+            strings.general.noInputs);
+    }
 };
 
 const giveUp = app => {
