@@ -1,5 +1,3 @@
-'use strict';
-
 const random = require('random-js');
 
 const RAND_ENG = random.engines.nativeMath;
@@ -15,9 +13,13 @@ function generatePassword(numDigits) {
         remainingDigits.push(i);
     }
 
-    // Shuffle the array
-    Random.shuffle(RAND_ENG, remainingDigits);
+    // Shuffle the aray
+    random.shuffle(RAND_ENG, remainingDigits);
 
     // Return the first N numbers
     return remainingDigits.slice(0, numDigits);
 }
+
+module.exports = {
+   generatePassword
+};
