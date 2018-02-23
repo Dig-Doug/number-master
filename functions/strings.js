@@ -46,9 +46,10 @@ const general = {
 
 const response = {
     "win": "You win!",
-    "error_not_a_number": "Please say a four-digit number. Digit cannot repeat.",
+    "error_not_a_number": "Please guess a four-digit number. Digit cannot repeat.",
     "start_new_game_speech": "OK, new game. Please guess a four digit number",
-    "start_new_game_display": "Please guess a four digit number"
+    "start_new_game_display": "Please guess a four digit number",
+    "how_to_play": "Please guess a four-digit number. Digit cannot repeat. You have 10 tries.",
 };
 
 const suggestions = {
