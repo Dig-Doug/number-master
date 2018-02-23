@@ -19,6 +19,7 @@ const { sprintf } = require('sprintf-js');
 
 const strings = require('./strings');
 const generatePassword = require('./generate_password');
+const verification = require('./verification');
 
 process.env.DEBUG = 'actions-on-google:*';
 
@@ -53,8 +54,17 @@ const guessNumber = app => {
   const secretNumber = data.secretNumber;
   /** @type {string} */
   const userGuess = app.getArgument(Parameters.NUMBER);
+  const userGuessArray = verification.stringToDigitArray(userGuess);
+  if (!verification.isValidArray(userGuessArray)) {
+    return app.ask(app.buildRichResponse()
+        .addSimpleResponse('Please say a number')
+        .addSuggestions(['1234', '5678', '1357', 'Give up']),
+        strings.general.noInputs);
+  }
+  const answer = verification.verify(userGuessArray, secretNumber);
   console.log('secretNumber: ' + secretNumber);
-  const response = 'You got X digit in the correct position, and Y digit in the wrong position.';
+  
+  const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
   return app.ask(app.buildRichResponse()
     .addSimpleResponse({
       speech: `${userGuess}. ${response}`,
