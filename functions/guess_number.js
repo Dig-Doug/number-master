@@ -37,7 +37,7 @@ const guessNumber = app => {
     if (answer[0] === NUM_DIGITS) {
         // Win
         const card = app.buildBasicCard(strings.general.win)
-            .setImage(strings.general.winImage, strisgs.general.winImageAlt);
+            .setImage(strings.general.winImage, strings.general.winImageAlt);
 
         const richResponse = app.buildRichResponse()
             .addSimpleResponse(strings.general.winSound)
@@ -51,8 +51,13 @@ const guessNumber = app => {
     }
     else if (data.numTriesLeft == 0) {
         // Lose
+        const card = app.buildBasicCard(
+            strings.general.lose + " The answer was " + data.secretNumber.join(''))
+            .setImage(strings.general.loseImage, strings.general.loseImageAlt);
+    
         return app.ask(app.buildRichResponse()
-                .addSimpleResponse('You lose!')
+                .addSimpleResponse(strings.general.loseSound)
+                .addBasicCard(card)
                 .addSuggestions([
                   generateSuggestion(),
                   generateSuggestion(),
