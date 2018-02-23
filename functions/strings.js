@@ -63,6 +63,7 @@ const response = {
 
 const suggestions = {
     "giveup": "Give up",
+    "instructions": "How to play",
     "play_again": "Play again",
     "start_new_game": "Start a new game",
     "quit": "Quit",
