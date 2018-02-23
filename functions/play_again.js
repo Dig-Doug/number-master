@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const {initData} = require('./init_data');
 const strings = require('./strings');
 
