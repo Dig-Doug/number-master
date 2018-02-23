@@ -46,6 +46,9 @@ const initData = app => {
   if (!data.secretNumber) {
     data.secretNumber = generatePassword.generatePassword(4);
   }
+  if (!data.numTriesLeft) {
+    data.numTriesLeft = 10;
+  }
   return data;
 };
 
@@ -75,8 +78,18 @@ const guessNumber = app => {
       strings.general.noInputs);
   }
   console.log('secretNumber: ' + secretNumber);
+
+  data.numTriesLeft = data.numTriesLeft - 1;
+  if (data.numTriesLeft == 0) {
+    return app.ask(app.buildRichResponse()
+      .addSimpleResponse('You lose!')
+      .addSuggestions([
+        'Play again',
+        'Quit']),
+      strings.general.noInputs);
+  }
   
-  const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
+  const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position. You have ${data.numTriesLeft} tries left`;
   return app.ask(app.buildRichResponse()
     .addSimpleResponse({
       speech: `${userGuessArray}. ${response}`,
