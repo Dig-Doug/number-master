@@ -61,6 +61,8 @@ const guessNumber = app => {
         const card = app.buildBasicCard(playSound(strings.general.winSound, strings.general.win))
             .setImage(strings.general.winImage, strings.general.winImageAlt);
 
+        data.secretNumber = generatePassword.generatePassword(4);
+        data.numTriesLeft = 10;
         const richResponse = app.buildRichResponse()
             .addSimpleResponse(playSound(strings.general.winSound, strings.general.win))
             .addBasicCard(card)

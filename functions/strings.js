@@ -31,14 +31,12 @@ const general = {
         "We can stop here. See you soon."
     ],
     win: "You win!",
-    // TODO(droeper) - Update image
-    winImage: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Search_GSA.2e16d0ba.fill-300x300.png",
+    winImage: "https://cdn.shopify.com/s/files/1/0185/5092/products/objects-0017.png?v=1369543805",
     winImageAlt: "Win image",
     // TODO(droeper) - Update sound
     winSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
     lose: "You lose!",
-    // TODO(droeper) - Update image
-    loseImage: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Search_GSA.2e16d0ba.fill-300x300.png",
+    loseImage: "https://cdn.pixabay.com/photo/2018/02/19/14/16/the-eleventh-hour-3165193_1280.jpg",
     loseImageAlt: "Lose image",
     // TODO(droeper) - Update sound
     loseSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
