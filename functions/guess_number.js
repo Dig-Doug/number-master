@@ -61,7 +61,7 @@ const guessNumber = app => {
         const card = app.buildBasicCard(playSound(strings.general.winSound, strings.general.win))
             .setImage(strings.general.winImage, strings.general.winImageAlt);
 
-        const richResponse = app.buildRichResponse(
+        const richResponse = app.buildRichResponse()
             .addSimpleResponse(playSound(strings.general.winSound, strings.general.win))
             .addBasicCard(card)
             .addSuggestions([
