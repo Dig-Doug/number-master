@@ -67,7 +67,7 @@ const guessNumber = app => {
                   strings.suggestions.play_again]),
             strings.general.noInputs);
     } else {
-        const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
+        const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position. Cheat: ${data.secretNumber}`;
         return app.ask(app.buildRichResponse()
                 .addSimpleResponse({
                     speech: `${userGuessArray}. ${response}`,
