@@ -66,6 +66,14 @@ const guessNumber = app => {
         strings.general.noInputs);
   }
   const answer = verification.verify(userGuessArray, secretNumber);
+  if (answer[0] == 4) {
+    return app.ask(app.buildRichResponse()
+      .addSimpleResponse('You win!')
+      .addSuggestions([
+        'Play again',
+        'Quit']),
+      strings.general.noInputs);
+  }
   console.log('secretNumber: ' + secretNumber);
   
   const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
