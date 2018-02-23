@@ -41,10 +41,6 @@ const Parameters = {
 /** @param {Array<string>} messages The messages to concat */
 const concat = messages => messages.map(message => message.trim()).join(' ');
 
-const generateSuggestion = () => {
-    return generatePassword.generatePassword(4).join('');
-};
-
 /** @type {Map<string, function(DialogflowApp): void>} */
 const actionMap = new Map();
 actionMap.set(Actions.GUESS_NUMBER, guessNumber);

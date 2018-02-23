@@ -15,3 +15,7 @@ const playAgain = app => {
               strings.suggestions.quit]),
         strings.general.noInputs);
 };
+
+module.exports = {
+    playAgain,
+};
