@@ -39,7 +39,7 @@ const general = {
     loseImage: "https://cdn.pixabay.com/photo/2018/02/19/14/16/the-eleventh-hour-3165193_1280.jpg",
     loseImageAlt: "Lose image",
     // TODO(droeper) - Update sound
-    loseSound: "https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg",
+    loseSound: "https://actions.google.com/sounds/v1/crowds/voices_angry.ogg",
     status: (correct, incorrect, tries) => {
         const digit = (num, name, names) => {
             return `${num} ${num == 1 ? name : names}`;
