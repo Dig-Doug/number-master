@@ -57,8 +57,11 @@ const guessNumber = app => {
   const userGuessArray = verification.stringToDigitArray(userGuess);
   if (!verification.isValidArray(userGuessArray)) {
     return app.ask(app.buildRichResponse()
-        .addSimpleResponse('Please say a number')
-        .addSuggestions(['1234', '5678', '1357', 'Give up']),
+        .addSimpleResponse('Please say a four-digit number. Digit cannot repeat.')
+        .addSuggestions([generatePassword.generatePassword(4),
+          generatePassword.generatePassword(4),
+          generatePassword.generatePassword(4),
+          'Give up']),
         strings.general.noInputs);
   }
   const answer = verification.verify(userGuessArray, secretNumber);
@@ -69,7 +72,10 @@ const guessNumber = app => {
     .addSimpleResponse({
       speech: `${userGuessArray}. ${response}`,
       displayText: response})
-    .addSuggestions(['1234', '5678', '1357', 'Give up']),
+    .addSuggestions([generatePassword.generatePassword(4),
+      generatePassword.generatePassword(4), 
+      generatePassword.generatePassword(4),
+      'Give up']),
     strings.general.noInputs);
 };
 
