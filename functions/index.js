@@ -21,6 +21,7 @@ const strings = require('./strings');
 const {initData} = require('./init_data');
 const {guessNumber} = require('./guess_number');
 const {giveUp} = require('./give_up');
+const {instructions} = require('./instructions');
 const {playAgain} = require('./play_again');
 
 process.env.DEBUG = 'actions-on-google:*';
@@ -31,12 +32,14 @@ const Actions = {
     GUESS_NUMBER: 'guess.number',
     GIVE_UP: 'giveup',
     PLAY_AGAIN: 'play_again',
+    INSTRUCTIONS: 'instructions',
 };
 
 /** @type {Map<string, function(DialogflowApp): void>} */
 const actionMap = new Map();
 actionMap.set(Actions.GUESS_NUMBER, guessNumber);
 actionMap.set(Actions.GIVE_UP, giveUp);
+actionMap.set(Actions.INSTRUCTIONS, instructions);
 actionMap.set(Actions.PLAY_AGAIN, playAgain);
 
 /**
