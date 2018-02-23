@@ -49,6 +49,9 @@ const initData = app => {
     if (!data.secretNumber) {
         data.secretNumber = generatePassword.generatePassword(4);
     }
+    if (!data.numTriesLeft) {
+        data.numTriesLeft = 10;
+    }
     return data;
 };
 
@@ -74,6 +77,7 @@ const guessNumber = app => {
     }
     const answer = verification.verify(userGuessArray, secretNumber);
 
+    data.numTriesLeft = data.numTriesLeft - 1;
     if (answer[0] === NUM_DIGITS) {
         // Win
         const card = app.buildBasicCard(strings.general.win)
@@ -88,6 +92,14 @@ const guessNumber = app => {
         // TODO: Play again
 
         return app.ask(richResponse, strings.general.noInputs);
+    }
+    else if (data.numTriesLeft == 0) {
+        return app.ask(app.buildRichResponse()
+                .addSimpleResponse('You lose!')
+                .addSuggestions([
+                    'Play again',
+                    'Quit']),
+            strings.general.noInputs);
     } else {
         const response = `You got ${answer[0]} digit in the correct position, and ${answer[1]} digit in the wrong position.`;
         return app.ask(app.buildRichResponse()
@@ -155,5 +167,15 @@ const numberMastermind = functions.https.onRequest((request, response) => {
 });
 
 module.exports = {
+    < < < < < < < HEAD
+numberMastermind
+}
+;
+======
+=
     numberMastermind
-};
+}
+;
+>>>>>>>
+23241422
+cd053ae82f6d95031d2968a6e508d087
