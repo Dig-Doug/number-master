@@ -3,7 +3,10 @@ function stringToDigitArray(inputString) {
 
   var charArray = inputString.split("");
   for (var i = 0; i < charArray.length; ++i) {
-    digits.push(parseInt(charArray[i]));
+    const char = charArray[i];
+    if (char != ' ') {
+      digits.push(parseInt(charArray[i]));
+    }
   }
   return digits;
 }
